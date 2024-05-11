@@ -3,14 +3,15 @@
   <router-view />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import MainHeader from './components/MainHeader.vue';
+import {storeState, useStore} from './store/useStore';
+import {LocalStorageName} from './helpers/getStoredState';
 
-export default {
-  components: {
-    MainHeader
-  }
-}
+const store = useStore();
+store.$subscribe((mutation, state) => {
+  localStorage.setItem(LocalStorageName, JSON.stringify({...state, products: [], isErrorLoading: false, paged: 0} as storeState))
+})
 
 </script>
 
@@ -30,5 +31,12 @@ body {
   border: none;
   border-radius: 0;
   border-bottom: 1px solid #e2e8f0;
+}
+
+.container {
+  max-width: 960px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin: auto;
 }
 </style>

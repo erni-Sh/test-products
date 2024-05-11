@@ -21,3 +21,13 @@ export interface IProductsResponse {
 
 export type LayoutType = 'grid' | 'list';
 export type ImagesType = string[];
+
+export interface getProductsProps {
+  rowsPerPage: number,
+  paged: number,
+}
+
+export type requestProductsParams = {
+  limit: string,
+  skip: string
+}

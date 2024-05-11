@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import ProductList from '@/views/ProductList.vue';
+import ProductList from '@/views/ProductsPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
   }, {
     path: '/products/:id',
     name: 'Product',
-    component: () => import('@/views/ProductInner.vue')
+    component: () => import('@/views/ProductInnerPage.vue')
   }
 ]
 

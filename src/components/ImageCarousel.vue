@@ -1,7 +1,7 @@
 <template>
   <Carousel :value="images" :numVisible="3" :numScroll="images?.length || 3" :responsiveOptions="responsiveOptions">
     <template #item="slotProps">
-      <div class="border-1 surface-border border-round m-2 p-3" style="height: 300px">
+      <div class="surface-border border-round m-2 p-3 flex align-items-center" style="height: 200px">
         <div class="mb-3">
           <div class="relative mx-auto">
             <img :src="slotProps.data" :alt="slotProps.data.name" class="w-full border-round" />
@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import {ref, defineProps, PropType} from "vue";
-import {ImagesType} from '@/types/ProductList';
+import {ImagesType} from '../types/productTypes';
 
 const props = defineProps({
   images: { type: Array as PropType<ImagesType>, required: true },

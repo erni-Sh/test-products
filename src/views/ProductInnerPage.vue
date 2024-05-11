@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <Breadcrumb :home="home" :model="items" />
 
     <div class="col-12 p-2">
@@ -41,14 +41,14 @@
 <script setup lang="ts">
 
 import {onMounted, watch, ref} from 'vue';
-import {IProduct} from '../types/ProductList';
+import {IProduct} from '../types/productTypes';
 import {useRoute} from 'vue-router';
 import ImageCarousel from '../components/ImageCarousel.vue';
 
 const product = ref({} as IProduct);
 
-const getInventoryStatus = (product) => product.stock < 50 ? 'OUTOFSTOCK' : product.stock < 100 ? 'LOWSTOCK' : 'INSTOCK';
-const getSeverity = (product) => product.stock < 50 ? 'danger' : product.stock < 100 ? 'warning' : 'success';
+const getInventoryStatus = (product: IProduct) => product.stock < 50 ? 'OUTOFSTOCK' : product.stock < 100 ? 'LOWSTOCK' : 'INSTOCK';
+const getSeverity = (product: IProduct) => product.stock < 50 ? 'danger' : product.stock < 100 ? 'warning' : 'success';
 
 // TODO refactore
 const home = ref({

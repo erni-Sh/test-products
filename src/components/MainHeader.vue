@@ -1,5 +1,5 @@
 <template>
-  <Menubar :model="items">
+  <Menubar :model="items" class="container">
     <template #item="{ item, props, hasSubmenu, root }">
       <router-link :to="item.to" v-ripple class="flex align-items-center" v-bind="props.action">
         <span :class="item.icon" />
