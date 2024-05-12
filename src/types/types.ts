@@ -5,7 +5,7 @@ export interface IProduct {
   description: string,
   discountPercentage: number,
   id: number,
-  images: ImagesType,
+  images: IImagesType,
   price: number,
   rating: number,
   stock: number,
@@ -19,21 +19,33 @@ export interface IProductsResponse {
   total: number,
 }
 
-export type ImagesType = string[];
+export type IImagesType = string[];
 
-export interface getProductsProps {
+export interface IProductsGetterProps {
   rowsPerPage: number,
   paged: number,
   q: string | undefined,
 }
 
-export type requestProductsParams = {
+export type IRequestProductsParams = {
   limit: string,
   skip: string,
   q: string,
 }
 
-export interface getProductProps {
+export interface IProductGetterProps {
   id: string,
 }
 
+export interface IProductsState {
+  isErrorLoading: boolean,
+  products: IProduct[],
+  total: number,
+  rowsPerPage: number,
+  paged: number,
+}
+
+export interface IProductState {
+  product: IProduct | null,
+  isErrorLoading: boolean,
+}

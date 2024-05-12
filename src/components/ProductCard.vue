@@ -35,7 +35,7 @@
 import ImageCarousel from '@/components/ImageCarousel.vue';
 import {useProduct} from '@/store/useProduct';
 import {computed} from 'vue';
-import {IProduct} from '@/types/productTypes';
+import {IProduct} from '../types/types';
 
 const productStore = useProduct();
 const product = computed(() => productStore.product);

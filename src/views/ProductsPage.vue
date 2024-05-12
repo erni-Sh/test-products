@@ -9,6 +9,7 @@
       </template>
     </Suspense>
     <Paginator
+      class="mb-7"
       v-if="productsState.products.length"
       v-model:rows="productsState.rowsPerPage"
       :rowsPerPageOptions="[5, 10, 25, 50, 100]"
@@ -25,14 +26,14 @@
 </template>
 
 <script setup lang="ts">
-import {ref, watch} from 'vue';
+import {onUnmounted, ref, watch} from 'vue';
 import {useProducts} from '@/store/useProducts';
 import ProductTable from '@/components/ProductTable.vue';
 import ProductTableLoader from '@/components/ProductTableLoader.vue';
 
 const productsState = useProducts();
 const firstItemNumber = ref(1);
-const lastItemNumber = ref(1);
+const lastItemNumber = ref(productsState.rowsPerPage);
 
 watch(productsState, newState => {
   firstItemNumber.value = newState.rowsPerPage * newState.paged + 1;
@@ -41,6 +42,7 @@ watch(productsState, newState => {
   lastItemNumber.value = lastCount > newState.total ? newState.total : lastCount;
 }, {deep: true})
 
+onUnmounted(() => productsState.paged = 0);
 </script>
 
 <style scoped>

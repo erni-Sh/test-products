@@ -22,7 +22,7 @@
 import DataTable from 'primevue/datatable';
 import {useProducts} from '../store/useProducts';
 import {defineProps, ref, watch} from 'vue';
-import {IProduct} from '../types/productTypes';
+import {IProduct} from '../types/types';
 import {useRouter} from 'vue-router';
 
 const props = defineProps({

@@ -1,23 +1,9 @@
 import {defineStore} from 'pinia';
-import {
-  IProduct,
-  IProductsResponse,
-  getProductsProps,
-  requestProductsParams,
-} from '@/types/productTypes';
+import {IProductsGetterProps, IProductsResponse, IProductsState, IRequestProductsParams,} from '@/types/types';
 import {getStoredState} from '@/helpers/getStoredState';
+import {API_MAIN, apiPaths} from '@/store/apiPaths';
 
-export const API_MAIN = 'https://dummyjson.com/';
-
-export interface storeState {
-  isErrorLoading: boolean,
-  products: IProduct[],
-  total: number,
-  rowsPerPage: number,
-  paged: number,
-}
-
-const initialState: storeState = getStoredState() || {
+const initialState: IProductsState = getStoredState() || {
   isErrorLoading: false,
   products: [],
   total: 0,
@@ -25,17 +11,21 @@ const initialState: storeState = getStoredState() || {
   paged: 0,
 };
 
-export const useProducts = defineStore("store", {
-  state: () => initialState,
+export const useProducts = defineStore('products', {
+  state: (): IProductsState => initialState,
   actions: {
-    async getProducts({q, rowsPerPage, paged}: getProductsProps) {
+    async getProducts({ q, rowsPerPage, paged }: IProductsGetterProps) {
       this.isErrorLoading = false;
 
-      await fetch(API_MAIN + `products${q?.length ? '/search' : ''}?` + new URLSearchParams({
+      const params: IRequestProductsParams = {
         limit: rowsPerPage.toString(),
         skip: (rowsPerPage * paged).toString(),
         q: q || '',
-      } as requestProductsParams))
+      }
+
+      const url = API_MAIN + `${q?.length ? apiPaths.search : apiPaths.products}?` + new URLSearchParams(params);
+
+      await fetch(url)
         .then(res => res.json())
         .then((p :IProductsResponse) => {
           this.products = p.products,

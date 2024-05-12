@@ -1,7 +1,7 @@
 <template>
   <h2>Details</h2>
-  <ProductCard v-if="productStore.product?.id" />
-  <ProductCardLoader v-if="!productStore.product?.id" />
+  <ProductCard v-if="productStore.product" />
+  <ProductCardLoader v-if="!productStore.product" />
 </template>
 
 <script setup lang="ts">
@@ -13,8 +13,8 @@ import ProductCardLoader from '@/components/ProductCardLoader.vue';
 const route = useRoute();
 
 const productStore = useProduct();
-productStore.getProduct({id: route.params.id as string || ''})
-
+const id = typeof route.params.id === 'string' ? route.params.id : '';
+productStore.getProduct({ id });
 </script>
 
 <style scoped>

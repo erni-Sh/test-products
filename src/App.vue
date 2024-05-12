@@ -6,13 +6,15 @@
 </template>
 
 <script setup lang="ts">
-import MainHeader from './components/MainHeader.vue';
-import {storeState, useProducts} from './store/useProducts';
-import {LocalStorageName} from './helpers/getStoredState';
+import MainHeader from '@/components/MainHeader.vue';
+import {useProducts} from '@/store/useProducts';
+import {LocalStorageName} from '@/helpers/getStoredState';
+import {IProductsState} from './types/types';
 
 const productsState = useProducts();
 productsState.$subscribe((mutation, state) => {
-  localStorage.setItem(LocalStorageName, JSON.stringify({...state, products: [], isErrorLoading: false, paged: 0} as storeState))
+  const stateToSave: IProductsState = {...state, products: [], isErrorLoading: false, paged: 0 };
+  localStorage.setItem(LocalStorageName, JSON.stringify(stateToSave));
 })
 
 </script>

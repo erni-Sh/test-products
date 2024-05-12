@@ -1,16 +1,22 @@
 import {defineStore} from 'pinia';
-import {getProductProps, IProduct} from '@/types/productTypes';
+import {IProductGetterProps, IProductState} from '@/types/types';
+import {API_MAIN, apiPaths} from '@/store/apiPaths';
+
+const initialState: IProductState = {
+  product: null,
+  isErrorLoading: false,
+}
 
 export const useProduct = defineStore('product', {
-  state: () => ({
-    product: {} as IProduct | object,
-    isErrorLoading: false,
-  }),
+  state: (): IProductState => initialState,
   actions: {
-    async getProduct({id}: getProductProps) {
-      this.product = {};
+    async getProduct({ id }: IProductGetterProps) {
+      this.product = null;
       this.isErrorLoading = false;
-      fetch('https://dummyjson.com/products/' + id)
+
+      const url = API_MAIN + apiPaths.products + id;
+
+      fetch(url)
         .then(res => res.status === 200
           ? res.json()
           : (this.isErrorLoading = true))
