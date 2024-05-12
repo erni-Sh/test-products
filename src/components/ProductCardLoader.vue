@@ -24,8 +24,6 @@
           <span class="text-2xl font-semibold text-900"><Skeleton width="30%" height="2rem" /></span>
           <div class="flex gap-2">
             <Skeleton width="100%" height="38px" />
-<!--            <Button icon="pi pi-shopping-cart" label="Buy Now" :disabled="(getInventoryStatus(product)) === 'OUTOFSTOCK'" class="flex-auto white-space-nowrap"></Button>-->
-<!--            <Button icon="pi pi-heart" outlined></Button>-->
           </div>
         </div>
       </div>
@@ -34,23 +32,21 @@
 </template>
 
 <script setup>
-
 import {computed, watch} from 'vue';
 import {useToast} from 'primevue/usetoast';
 import {useProduct} from '@/store/useProduct';
 import {useRouter} from 'vue-router';
 
-const productStore = useProduct();
-const router = useRouter();
-const isErrorLoading = computed(() => productStore.isErrorLoading);
-
 const toast = useToast();
+const router = useRouter();
+const productStore = useProduct();
+
+const isErrorLoading = computed(() => productStore.isErrorLoading);
 watch(isErrorLoading, isError => {
   if(!isError) return;
   toast.add({ severity: 'error', summary: 'Product not available', detail: 'You will be redirected to the main directory', life: 3000 });
   setTimeout(() => router.push('/'), 3000);
 });
-
 </script>
 
 <style scoped>

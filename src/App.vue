@@ -7,11 +7,11 @@
 
 <script setup lang="ts">
 import MainHeader from './components/MainHeader.vue';
-import {storeState, useStore} from './store/useStore';
+import {storeState, useProducts} from './store/useProducts';
 import {LocalStorageName} from './helpers/getStoredState';
 
-const store = useStore();
-store.$subscribe((mutation, state) => {
+const productsState = useProducts();
+productsState.$subscribe((mutation, state) => {
   localStorage.setItem(LocalStorageName, JSON.stringify({...state, products: [], isErrorLoading: false, paged: 0} as storeState))
 })
 
@@ -21,6 +21,7 @@ store.$subscribe((mutation, state) => {
 body {
   padding: 0;
   margin: 0;
+  min-width: 320px;
 }
 
 #app {

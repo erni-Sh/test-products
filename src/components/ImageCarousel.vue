@@ -10,19 +10,11 @@
       </div>
     </template>
   </Carousel>
-<!--  <Galleria :value="images" :responsiveOptions="galleriaResponsiveOptions" :numVisible="5" containerStyle="max-width: 640px">-->
-<!--    <template #item="slotProps">-->
-<!--      <img :src="slotProps.item" :alt="slotProps.item" style="width: 100%" />-->
-<!--    </template>-->
-<!--    <template #thumbnail="slotProps">-->
-<!--      <img :src="slotProps.item" :alt="slotProps.item" />-->
-<!--    </template>-->
-<!--  </Galleria>-->
 </template>
 
 <script setup lang="ts">
-import {ref, defineProps, PropType} from "vue";
-import {ImagesType} from '../types/productTypes';
+import {ref, defineProps, PropType} from 'vue';
+import {ImagesType} from '@/types/productTypes';
 
 const props = defineProps({
   images: { type: Array as PropType<ImagesType>, required: true },
@@ -51,16 +43,4 @@ const responsiveOptions = ref([
     numScroll: 1
   }
 ]);
-
-const galleriaResponsiveOptions = ref([
-  {
-    breakpoint: '1300px',
-    numVisible: 4
-  },
-  {
-    breakpoint: '575px',
-    numVisible: 1
-  }
-]);
-
 </script>

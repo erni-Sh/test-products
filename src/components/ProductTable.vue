@@ -1,18 +1,18 @@
 <template>
-  <h4 v-if="!store.products.length">No results</h4>
+  <h4 v-if="!productsState.products.length">No results</h4>
   <DataTable
-    v-if="store.products.length"
-    :value="store.products"
+    v-if="productsState.products.length"
+    :value="productsState.products"
     removableSort
     tableStyle="min-width: 50rem"
     stripedRows
     v-model:selection="selectedProduct"
     selectionMode="single"
   >
-    <Column field="title" header="Name" sortable />
-    <Column field="brand" header="Brand" sortable />
-    <Column field="category" header="Category" sortable />
-    <Column field="price" header="Price" sortable>
+    <Column field="title" header="Name" sortable style="width: 40%" />
+    <Column field="brand" header="Brand" sortable style="width: 27%" />
+    <Column field="category" header="Category" sortable style="width: 18%" />
+    <Column field="price" header="Price" sortable style="width: 15%">
       <template #body="slotProps">${{ slotProps.data.price }}</template>
     </Column>
   </DataTable>
@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import DataTable from 'primevue/datatable';
-import {useStore} from '@/store/useStore';
+import {useProducts} from '../store/useProducts';
 import {defineProps, ref, watch} from 'vue';
 import {IProduct} from '../types/productTypes';
 import {useRouter} from 'vue-router';
@@ -38,9 +38,8 @@ watch(selectedProduct, (newValue: IProduct) => {
   router.push(`/products/${newValue.id}`)
 })
 
-const store = useStore();
-
-await store.getProducts({ rowsPerPage, paged, q });
+const productsState = useProducts();
+await productsState.getProducts({ rowsPerPage, paged, q });
 
 </script>
 

@@ -3,7 +3,7 @@ import {
   IProduct,
   IProductsResponse,
   getProductsProps,
-  requestProductsParams, getProductProps,
+  requestProductsParams,
 } from '@/types/productTypes';
 import {getStoredState} from '@/helpers/getStoredState';
 
@@ -25,7 +25,7 @@ const initialState: storeState = getStoredState() || {
   paged: 0,
 };
 
-export const useStore = defineStore("store", {
+export const useProducts = defineStore("store", {
   state: () => initialState,
   actions: {
     async getProducts({q, rowsPerPage, paged}: getProductsProps) {
@@ -43,9 +43,7 @@ export const useStore = defineStore("store", {
         })
         .catch(e => this.isErrorLoading = true);
     },
-
   },
   getters: {
-
   },
 });
