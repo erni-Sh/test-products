@@ -1,5 +1,5 @@
 <template>
-  <Menubar :model="items" class="container">
+  <Menubar :model="menuItems" class="container">
     <template #item="{ item, props, hasSubmenu, root }">
       <router-link :to="item.to" v-ripple class="flex align-items-center" v-bind="props.action">
         <span :class="item.icon" />
@@ -19,11 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import {useRouter} from 'vue-router';
+import {computed, ref, watch} from "vue";
+import {useRoute, useRouter} from 'vue-router';
 
-const inputValue = ref();
-const items = ref([
+const menuItems = ref([
   {
     label: 'Home',
     icon: 'pi pi-home',
@@ -80,10 +79,13 @@ const items = ref([
   // }
 ]);
 
+const route = useRoute();
+const searchQuery = computed(() => route.query.q);
+const inputValue = ref();
+watch(searchQuery, newSearchQuery => inputValue.value = newSearchQuery);
+
 const router = useRouter();
-const onSubmit = () => {
-  router.push(`/search/${inputValue.value}`)
-}
+const onSubmit = () => router.push(inputValue.value ? `/?q=${inputValue.value}` : '/');
 
 </script>
 

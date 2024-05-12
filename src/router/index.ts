@@ -7,13 +7,13 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Product List',
     component: ProductList
   }, {
+    path: '/:q',
+    name: 'Search',
+    component: ProductList,
+  }, {
     path: '/products/:id',
     name: 'Product',
     component: () => import('@/views/ProductInnerPage.vue')
-  }, {
-    path: '/search/:q',
-    name: 'Search',
-    component: () => import('@/views/SearchPage.vue')
   }
 ]
 

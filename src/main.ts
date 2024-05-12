@@ -3,6 +3,7 @@ import App from './App.vue'
 import { createPinia } from 'pinia'
 import router from './router'
 import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
 import 'primeflex/primeflex.css';
 import 'primevue/resources/themes/aura-light-green/theme.css';
 import 'primevue/resources/primevue.min.css'; /* Deprecated */
@@ -23,4 +24,9 @@ app.directive('ripple', Ripple);
 
 globalComponents.map((component) => app.component(component.name, component));
 
-app.use(router).use(PrimeVue, { ripple: true  }).use(pinia).mount('#app')
+app
+  .use(router)
+  .use(pinia)
+  .use(PrimeVue, { ripple: true  })
+  .use(ToastService)
+  .mount('#app')

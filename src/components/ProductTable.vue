@@ -1,5 +1,7 @@
 <template>
+  <h4 v-if="!store.products.length">No results</h4>
   <DataTable
+    v-if="store.products.length"
     :value="store.products"
     removableSort
     tableStyle="min-width: 50rem"
@@ -24,9 +26,9 @@ import {IProduct} from '../types/productTypes';
 import {useRouter} from 'vue-router';
 
 const props = defineProps({
-  rowsPerPage: { type: Number },
-  paged: { type: Number },
-  q: {type: String },
+  rowsPerPage: { type: Number, required: true },
+  paged: { type: Number, required: true },
+  q: {type: String, required: false },
 })
 const { rowsPerPage, paged, q } = {...props};
 
@@ -38,9 +40,7 @@ watch(selectedProduct, (newValue: IProduct) => {
 
 const store = useStore();
 
-q?.length ? await store.searchProduct({q}) :
-(rowsPerPage && paged) ? await store.getProducts({ rowsPerPage, paged }) :
-undefined
+await store.getProducts({ rowsPerPage, paged, q });
 
 </script>
 

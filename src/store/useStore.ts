@@ -3,8 +3,7 @@ import {
   IProduct,
   IProductsResponse,
   getProductsProps,
-  requestProductsParams,
-  requestSearchParams, searchProductsProps
+  requestProductsParams, getProductProps,
 } from '@/types/productTypes';
 import {getStoredState} from '@/helpers/getStoredState';
 
@@ -29,26 +28,22 @@ const initialState: storeState = getStoredState() || {
 export const useStore = defineStore("store", {
   state: () => initialState,
   actions: {
-    async fetchProducts(url: string) {
+    async getProducts({q, rowsPerPage, paged}: getProductsProps) {
       this.isErrorLoading = false;
 
-      await fetch(url)
+      await fetch(API_MAIN + `products${q?.length ? '/search' : ''}?` + new URLSearchParams({
+        limit: rowsPerPage.toString(),
+        skip: (rowsPerPage * paged).toString(),
+        q: q || '',
+      } as requestProductsParams))
         .then(res => res.json())
         .then((p :IProductsResponse) => {
           this.products = p.products,
-          this.total = p.total
+            this.total = p.total
         })
         .catch(e => this.isErrorLoading = true);
     },
-    async getProducts({rowsPerPage, paged}: getProductsProps) {
-      await this.fetchProducts(API_MAIN + `products?` + new URLSearchParams({
-        limit: rowsPerPage.toString(),
-        skip: (rowsPerPage * paged).toString()
-      } as requestProductsParams))
-    },
-    async searchProduct({q}: searchProductsProps) {
-      await this.fetchProducts(API_MAIN + `products/search?` + new URLSearchParams({q} as requestSearchParams))
-    }
+
   },
   getters: {
 

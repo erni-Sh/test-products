@@ -19,24 +19,21 @@ export interface IProductsResponse {
   total: number,
 }
 
-export type LayoutType = 'grid' | 'list';
 export type ImagesType = string[];
 
 export interface getProductsProps {
   rowsPerPage: number,
   paged: number,
+  q: string | undefined,
 }
 
 export type requestProductsParams = {
   limit: string,
-  skip: string
-}
-
-
-export interface searchProductsProps {
+  skip: string,
   q: string,
 }
 
-export type requestSearchParams = {
-  q: string,
+export interface getProductProps {
+  id: string,
 }
+

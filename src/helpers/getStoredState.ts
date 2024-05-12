@@ -1,5 +1,3 @@
-import {storeState} from '@/store/useStore';
-
 export const LocalStorageName = 'store';
 
 export const getStoredState = () => {

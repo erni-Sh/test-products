@@ -12,6 +12,7 @@ import Galleria from 'primevue/galleria';
 import Card from 'primevue/card';
 import Column from 'primevue/column';
 import Message from 'primevue/message';
+import Toast from 'primevue/toast';
 
 export default [
   Menubar,
@@ -27,5 +28,6 @@ export default [
   Galleria,
   Card,
   Column,
-  Message
+  Message,
+  Toast,
 ];
