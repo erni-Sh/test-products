@@ -31,3 +31,12 @@ export type requestProductsParams = {
   limit: string,
   skip: string
 }
+
+
+export interface searchProductsProps {
+  q: string,
+}
+
+export type requestSearchParams = {
+  q: string,
+}

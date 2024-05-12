@@ -10,7 +10,7 @@ git init
 git add -A
 git commit -m 'deploy'
 
-#git push -f git@github.com:erni-Sh/test-products.git master:gh-pages
-git subtree push --prefix dist origin gh-pages
+git push -f git@github.com:erni-Sh/test-products.git main:gh-pages
+#git subtree push --prefix dist origin gh-pages
 
 cd -

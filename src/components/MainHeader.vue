@@ -10,15 +10,17 @@
       </router-link>
     </template>
     <template #end>
-      <div class="flex align-items-center gap-2">
-        <InputText placeholder="Search" type="text" class="w-8rem sm:w-auto" v-model="inputValue"/>
-      </div>
+      <form class="flex align-items-center gap-2" @submit.prevent="onSubmit">
+        <InputText placeholder="Search" type="text" class="w-8rem sm:w-auto" v-model="inputValue" />
+        <button hidden type="submit" />
+      </form>
     </template>
   </Menubar>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import {useRouter} from 'vue-router';
 
 const inputValue = ref();
 const items = ref([
@@ -78,9 +80,10 @@ const items = ref([
   // }
 ]);
 
-watch(inputValue, async (newValue, oldValue) => {
-  console.log(newValue);
-})
+const router = useRouter();
+const onSubmit = () => {
+  router.push(`/search/${inputValue.value}`)
+}
 
 </script>
 

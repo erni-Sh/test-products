@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import Vue, { createApp } from 'vue';
 import App from './App.vue'
 import { createPinia } from 'pinia'
 import router from './router'
@@ -11,6 +11,10 @@ import 'primeicons/primeicons.css';
 import Ripple from 'primevue/ripple';
 
 import globalComponents from '@/components/globalComponents';
+
+// Vue.config.errorHandler = function (err, vm, info) {
+//   console.log(err);
+// }
 
 const app = createApp(App);
 const pinia = createPinia()

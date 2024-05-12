@@ -1,6 +1,8 @@
 <template>
   <MainHeader class="menubar mb-5"/>
-  <router-view />
+  <div class="container">
+    <router-view />
+  </div>
 </template>
 
 <script setup lang="ts">

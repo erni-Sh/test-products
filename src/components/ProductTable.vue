@@ -24,9 +24,11 @@ import {IProduct} from '../types/productTypes';
 import {useRouter} from 'vue-router';
 
 const props = defineProps({
-  rowsPerPage: { type: Number, required: true },
-  paged: { type: Number, required: true },
+  rowsPerPage: { type: Number },
+  paged: { type: Number },
+  q: {type: String },
 })
+const { rowsPerPage, paged, q } = {...props};
 
 const selectedProduct = ref();
 const router = useRouter();
@@ -35,10 +37,11 @@ watch(selectedProduct, (newValue: IProduct) => {
 })
 
 const store = useStore();
-await store.getProducts({
-  rowsPerPage: props.rowsPerPage,
-  paged: props.paged,
-}); //rowsPerPage params
+
+q?.length ? await store.searchProduct({q}) :
+(rowsPerPage && paged) ? await store.getProducts({ rowsPerPage, paged }) :
+undefined
+
 </script>
 
 <style scoped lang="scss">
