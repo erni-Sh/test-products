@@ -14,7 +14,7 @@ export const useProduct = defineStore('product', {
       this.product = null;
       this.isErrorLoading = false;
 
-      const url = API_MAIN + apiPaths.products + id;
+      const url = API_MAIN + apiPaths.products + '/' + id;
 
       fetch(url)
         .then(res => res.status === 200

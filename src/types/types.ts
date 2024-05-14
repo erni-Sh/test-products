@@ -38,8 +38,9 @@ export interface IProductGetterProps {
 }
 
 export interface IProductsState {
+  isFetching: boolean,
   isErrorLoading: boolean,
-  products: IProduct[],
+  products: IProduct[] | null,
   total: number,
   rowsPerPage: number,
   paged: number,

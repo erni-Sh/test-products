@@ -10,13 +10,12 @@
 
 <script setup lang="ts">
 import {ref, defineProps, PropType} from 'vue';
-import {IImagesType} from '../types/types';
+import {IImagesType} from '@/types/types';
 
 const props = defineProps({
   images: { type: Array as PropType<IImagesType>, required: true },
 })
 
-const products = ref();
 const responsiveOptions = ref([
   {
     breakpoint: '1400px',

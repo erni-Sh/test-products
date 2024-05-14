@@ -9,14 +9,13 @@
 import MainHeader from '@/components/MainHeader.vue';
 import {useProducts} from '@/store/useProducts';
 import {LocalStorageName} from '@/helpers/getStoredState';
-import {IProductsState} from './types/types';
+import {IProductsState} from '@/types/types';
 
 const productsState = useProducts();
 productsState.$subscribe((mutation, state) => {
-  const stateToSave: IProductsState = {...state, products: [], isErrorLoading: false, paged: 0 };
+  const stateToSave: IProductsState = {...state, products: null, isErrorLoading: false, paged: 0 };
   localStorage.setItem(LocalStorageName, JSON.stringify(stateToSave));
 })
-
 </script>
 
 <style lang="scss">
@@ -24,12 +23,6 @@ body {
   padding: 0;
   margin: 0;
   min-width: 320px;
-}
-
-#app {
-  //font-family: Avenir, Helvetica, Arial, sans-serif;
-  //-webkit-font-smoothing: antialiased;
-  //-moz-osx-font-smoothing: grayscale;
 }
 
 .menubar {
